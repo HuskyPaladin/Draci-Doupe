@@ -175,3 +175,37 @@ body {
 .uvodni-stranka .clanek {
     width: 100%;
 }
+
+
+/* NOVÝ VZHLED ÚVODNÍ STRÁNKY – ostatní podstránky zůstávají beze změny */
+body.novy-uvod { background: #07101e url("images/pozadí lísty 1.webp") center / cover fixed; font-family: Arial, sans-serif; }
+.novy-uvod #background-video { z-index: -3; }
+.novy-uvod .overlay { background: rgba(3, 9, 19, .73); z-index: -2; }
+.novy-uvod.video-vypnuto #background-video { display: none; }
+.novy-uvod.denni-rezim .overlay { background: rgba(12, 20, 30, .40); }
+.novy-uvod .web-obal { width: min(1200px, calc(100% - 32px)); margin: 20px auto; }
+.novy-uvod .hlavicka { padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border: 1px solid #9b7a4b; background: rgba(5, 13, 27, .88); border-radius: 10px; }
+.novy-uvod .znacka { display: flex; align-items: center; gap: 15px; }
+.novy-uvod .znacka-ikona { width: 62px; height: 62px; display: grid; place-items: center; border: 1px solid #cba86a; border-radius: 7px; color: #e4c58c; font: bold 46px Georgia,serif; }
+.novy-uvod .hlavicka h1 { font-size: 27px; letter-spacing: 1px; font-weight: normal; }
+.novy-uvod .hlavicka p { font-size: 10px; letter-spacing: 1px; }
+.novy-uvod .prepinace { display: flex; flex-wrap: wrap; gap: 12px; }
+.novy-uvod .prepinace button { background: #0d1829; border: 1px solid #b39360; border-radius: 6px; color: #e4c58c; padding: 10px 12px; cursor: pointer; }
+.novy-uvod .prepinace button:focus-visible, .novy-uvod a:focus-visible { outline: 3px solid #ffe2a2; outline-offset: 3px; }
+.novy-uvod .navigace { max-width: none; margin: 12px 0; background: rgba(7, 17, 32, .92); }
+.novy-uvod .navigace a[aria-current="page"] { color: white; text-decoration: underline; text-underline-offset: 7px; }
+.novy-uvod .obsah { max-width: none; min-height: 0; margin: 0; padding: 24px; background: rgba(7, 15, 28, .92); }
+.novy-uvod .uvodni-stranka { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(240px, .8fr); align-items: stretch; gap: 28px; }
+.novy-uvod .obsah h2 { font-size: 27px; margin-bottom: 14px; }
+.novy-uvod .obsah h3 { color: #e4c58c; margin: 20px 0 12px; }
+.novy-uvod .obsah p { font-size: 15px; margin-bottom: 10px; }
+.novy-uvod .rychle-odkazy { display: flex; flex-wrap: wrap; gap: 12px; }
+.novy-uvod .rychle-odkazy a { display: inline-block; color: #f1d39a; text-decoration: none; border: 1px solid #9b7a4b; border-radius: 8px; padding: 13px; background: #101b2c; }
+.novy-uvod .externi-odkazy { display: flex; gap: 18px; flex-wrap: wrap; }
+.novy-uvod .externi-odkazy a { color: #f1d39a; }
+.novy-uvod .externi-odkazy img { width: 58px; height: 58px; object-fit: contain; display: block; margin-bottom: 5px; }
+.novy-uvod .hlavni-obrazek { margin: 0; }
+.novy-uvod .hlavni-obrazek img { width: 100%; height: 100%; max-height: 510px; object-fit: cover; border-radius: 9px; border: 1px solid #9b7a4b; display: block; }
+.novy-uvod .paticka { text-align: center; padding: 15px; border: 1px solid #9b7a4b; border-radius: 8px; color: #e4c58c; font-size: 12px; background: rgba(5, 13, 27, .92); margin-top: 12px; }
+@media (max-width: 760px) { .novy-uvod .hlavicka { flex-direction: column; align-items: flex-start; } .novy-uvod .uvodni-stranka { grid-template-columns: 1fr; } .novy-uvod .obsah { padding: 18px; } .novy-uvod .navigace { gap: 6px; } .novy-uvod .navigace a { font-size: 14px; padding: 8px; } .novy-uvod .hlavni-obrazek img { max-height: 400px; } }
+@media (prefers-reduced-motion: reduce) { .novy-uvod #background-video { display: none; } }
