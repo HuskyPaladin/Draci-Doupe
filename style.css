@@ -5,11 +5,30 @@
     box-sizing: border-box;
 }
 
+/* ================================== */
+/* POZADI CELE WEBOVE STRANKY         */
+/* ================================== */
+
 body {
     width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
+
+    /* Zalozni barva, pokud se obrazek nenacte */
     background-color: black;
+
+    /* Staticky obrazek na pozadi webu */
+    background-image: url("images/pozadí.png");
+
+    /* Obrazek vyplni celou obrazovku */
+    background-size: cover;
+
+    /* Obrazek zustane vycentrovany */
+    background-position: center;
+
+    /* Pozadi se pri posouvani nepohybuje */
+    background-attachment: fixed;
+
     color: white;
 }
 
@@ -35,29 +54,257 @@ body {
     pointer-events: none;
 }
 
+/* ================================== */
+/* SPOLECNY PANEL HLAVICKY A NAVIGACE */
+/* ================================== */
 
-/* HLAVICKA WEBU */
+.horni-panel {
+
+    /* Stejna maximalni sirka jako hlavni obsah */
+    max-width: 1100px;
+
+    /* Vycentrovani celeho panelu */
+    margin: 20px auto 0;
+
+    /* Tmave pruhledne pozadi */
+    background-color: rgba(15, 20, 30, 0.85);
+
+    /* Zlaty ramecek kolem celeho panelu */
+    border: 1px solid rgba(228, 197, 140, 0.5);
+
+    /* Zaoblene rohy */
+    border-radius: 10px;
+
+    /* Vnitrni odsazeni */
+    padding: 15px 20px;
+}
+
+/* ================================== */
+/* HLAVICKA WEBU                      */
+/* ================================== */
+
+/* HLAVICKA UVNITR SPOLECNEHO PANELU */
 
 .hlavicka {
-    padding: 30px 50px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    /* Hlavicka uz nema vlastni ramecek */
+    border: none;
+
+    /* Hlavicka uz nema vlastni pozadi */
+    background: transparent;
+
+    /* Odsazeni uvnitr spolecneho panelu */
+    padding: 0;
+
+    /* Odstraneni puvodnich vnejsich mezer */
+    margin: 0;
+
+    /* Hlavicka vyplni sirku rodice */
+    max-width: none;
+
     color: white;
     font-family: Arial, sans-serif;
 }
 
-.hlavicka h1 {
-    font-size: 36px;
-    letter-spacing: 4px;
-    color: #e4c58c;
+
+/* LOGO V HLAVICCE */
+
+.logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
 }
 
-.hlavicka p {
-    font-size: 13px;
+
+/* TEXT V HLAVICCE */
+
+.nazev-webu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* HLAVNI NAZEV WEBU */
+
+.hlavicka h1 {
+    /* Velikost hlavniho nadpisu */
+    font-size: 36px;
+
+    /* Zlata barva textu */
     color: #e4c58c;
+
+    /* Mezery mezi pismeny */
+    letter-spacing: 4px;
+}
+
+
+/* PODNADPIS WEBU */
+
+.hlavicka p {
+    /* Velikost podnadpisu */
+    font-size: 13px;
+
+    /* Zlata barva textu */
+    color: #e4c58c;
+
+    /* Odsazeni od hlavniho nadpisu */
     margin-top: 8px;
+
+    /* Mezery mezi pismeny */
     letter-spacing: 3px;
+
+    /* Prevedeni textu na velka pismena */
     text-transform: uppercase;
 }
 
+/* ================================== */
+/* GRAFICKE PREPINACE V HLAVICCE   */
+/* ================================== */
+
+
+/* KONTEJNER PRO OBA PREPINACE */
+
+.ovladani {
+
+    /* Oba prepinace budou vedle sebe */
+    display: flex;
+
+    /* Mezera mezi prepinaci */
+    gap: 30px;
+
+    /* Posunuti na pravou stranu hlavicky */
+    margin-left: auto;
+
+    /* Svisle zarovnani */
+    align-items: center;
+}
+
+
+/* JEDNA SKUPINA: IKONA + PREPINAC + IKONA */
+
+.skupina-prepinace {
+
+    display: flex;
+    align-items: center;
+
+    /* Mezera mezi ikonami a posuvnikem */
+    gap: 10px;
+}
+
+/* ================================== */
+/* SVG IKONY OVLADACICH PREPINACU      */
+/* ================================== */
+
+.symbol-prepinace {
+
+    /* Pevne rozmery ikon */
+    width: 24px;
+    height: 24px;
+
+    /* Zlata barva obrysu */
+    color: #e4c58c;
+
+    /* Ikony se nebudou zmensovat */
+    flex-shrink: 0;
+}
+
+
+/* SAMOTNY POSUVNY PREPINAC */
+
+.posuvny-prepinac {
+
+    /* Sirka a vyska posuvniku */
+    width: 60px;
+    height: 28px;
+
+    /* Tmave pozadi */
+    background-color: #080d18;
+
+    /* Zlaty ramecek */
+    border: 1px solid #e4c58c;
+
+    /* Kulaty tvar */
+    border-radius: 30px;
+
+    /* Umisteni kolecka uvnitr */
+    position: relative;
+
+    /* Klikaci kurzor */
+    cursor: pointer;
+
+    /* Tlacitko nema vnitrni odsazeni */
+    padding: 0;
+
+    /* Plynula animace */
+    transition: background-color 0.3s ease;
+}
+
+
+/* ZLATE KOLECKO UVNITR PREPINACE */
+
+.kolecko {
+
+    /* Rozmery kolecka */
+    width: 20px;
+    height: 20px;
+
+    /* Zlata barva */
+    background-color: #e4c58c;
+
+    /* Kulaty tvar */
+    border-radius: 50%;
+
+    /* Umisteni uvnitr posuvniku */
+    position: absolute;
+    top: 3px;
+    left: 4px;
+
+    /* Plynuly pohyb */
+    transition: transform 0.3s ease;
+}
+
+
+/* AKTIVNI STAV PREPINACE */
+
+.posuvny-prepinac.zapnuto .kolecko {
+
+    /* Posun kolecka doprava */
+    transform: translateX(30px);
+}
+
+
+/* EFEKT PRI NAJETI MYSI */
+
+.posuvny-prepinac:hover {
+
+    /* Jemne zvyrazneni */
+    background-color: #263044;
+}
+
+
+/* ZVYRAZNENI PRI OVLADANI KLAVESNICI */
+
+.posuvny-prepinac:focus-visible {
+
+    outline: 2px solid white;
+    outline-offset: 4px;
+}
+
+
+/* EFEKT PRI NAJETI MYŠÍ */
+
+.ovladani button:hover {
+
+    /* Svetlejsi pozadi */
+    background-color: rgba(228, 197, 140, 0.2);
+
+    /* Svetla barva textu */
+    color: white;
+}
 
 
 /* HLAVNI CTECI OKNO */
@@ -65,8 +312,8 @@ body {
 .obsah {
     max-width: 1100px;
     min-height: 400px;
-    margin: 20px auto;
-    padding: 40px;
+    margin: 0px auto;
+    padding: 30px;
 
     background-color: rgba(15, 20, 30, 0.85);
     border: 1px solid rgba(228, 197, 140, 0.3);
@@ -94,34 +341,104 @@ body {
 }
 
 
-/* NAVIGACNI LISTA */
+/* NAVIGACE UVNITR SPOLECNEHO PANELU */
 
 .navigace {
+
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
 
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 15px 25px;
+    /* Navigace bude uzsi nez hlavicka */
+    max-width: 800px;
 
-    background-color: rgba(15, 20, 30, 0.85);
-    border: 1px solid rgba(228, 197, 140, 0.3);
-    border-radius: 10px;
+    /* Vycentrovani a mezera od hlavicky */
+    margin: 15px auto 0;
+
+    /* Vnitrni odsazeni */
+    padding: 10px 20px;
+
+    /* Obrazkove pozadi zustava */
+    background-image:
+        linear-gradient(
+            rgba(10, 15, 25, 0.65),
+            rgba(10, 15, 25, 0.65)
+        ),
+        url("images/pozadí lišty 1.webp");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Zlaty ramecek navigace */
+    border: 1px solid rgba(228, 197, 140, 0.5);
+    border-radius: 8px;
 }
+
+/* ================================== */
+/* ODKAZY V NAVIGACNI LISTE           */
+/* ================================== */
 
 .navigace a {
+
+    /* Zlata barva textu */
     color: #e4c58c;
+
+    /* Odstraneni klasickeho podtrzeni */
     text-decoration: none;
+
+    /* Velikost pisma */
     font-family: Arial, sans-serif;
     font-size: 16px;
+
+    /* Vnitrni odsazeni odkazu */
     padding: 8px 12px;
-    transition: color 0.3s;
+
+    /* Pruhledny ramecek, aby se pri hoveru
+       nemenila velikost tlacitka */
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    /* Plynula animace */
+    transition: all 0.2s ease;
 }
 
+
+/* ================================== */
+/* EFEKT PRI NAJETI MYSI              */
+/* ================================== */
+
 .navigace a:hover {
-    color: white;
+
+    /* Cerne pozadi */
+    background-color: rgba(0, 0, 0, 0.9);
+
+    /* Zlaty ramecek */
+    border-color: #e4c58c;
+
+    /* Lehke vystoupeni tlacitka nahoru */
+    transform: translateY(-3px);
+
+    /* Jemny stin */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ================================== */
+/* AKTUALNE OTEVRENA STRANKA          */
+/* ================================== */
+
+.navigace a.aktivni {
+
+    /* Zlata linka pod textem */
+    text-decoration: underline;
+
+    /* Odsazeni podtrzeni od textu */
+    text-underline-offset: 8px;
+
+    /* Tloušťka podtrzeni */
+    text-decoration-thickness: 2px;
 }
 
 
@@ -176,36 +493,559 @@ body {
     width: 100%;
 }
 
+/* ================================== */
+/* SVETLEJSI BAREVNY REZIM            */
+/* ================================== */
 
-/* NOVÝ VZHLED ÚVODNÍ STRÁNKY – ostatní podstránky zůstávají beze změny */
-body.novy-uvod { background: #07101e url("images/pozadí lísty 1.webp") center / cover fixed; font-family: Arial, sans-serif; }
-.novy-uvod #background-video { z-index: -3; }
-.novy-uvod .overlay { background: rgba(3, 9, 19, .73); z-index: -2; }
-.novy-uvod.video-vypnuto #background-video { display: none; }
-.novy-uvod.denni-rezim .overlay { background: rgba(12, 20, 30, .40); }
-.novy-uvod .web-obal { width: min(1200px, calc(100% - 32px)); margin: 20px auto; }
-.novy-uvod .hlavicka { padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border: 1px solid #9b7a4b; background: rgba(5, 13, 27, .88); border-radius: 10px; }
-.novy-uvod .znacka { display: flex; align-items: center; gap: 15px; }
-.novy-uvod .znacka-ikona { width: 62px; height: 62px; display: grid; place-items: center; border: 1px solid #cba86a; border-radius: 7px; color: #e4c58c; font: bold 46px Georgia,serif; }
-.novy-uvod .hlavicka h1 { font-size: 27px; letter-spacing: 1px; font-weight: normal; }
-.novy-uvod .hlavicka p { font-size: 10px; letter-spacing: 1px; }
-.novy-uvod .prepinace { display: flex; flex-wrap: wrap; gap: 12px; }
-.novy-uvod .prepinace button { background: #0d1829; border: 1px solid #b39360; border-radius: 6px; color: #e4c58c; padding: 10px 12px; cursor: pointer; }
-.novy-uvod .prepinace button:focus-visible, .novy-uvod a:focus-visible { outline: 3px solid #ffe2a2; outline-offset: 3px; }
-.novy-uvod .navigace { max-width: none; margin: 12px 0; background: rgba(7, 17, 32, .92); }
-.novy-uvod .navigace a[aria-current="page"] { color: white; text-decoration: underline; text-underline-offset: 7px; }
-.novy-uvod .obsah { max-width: none; min-height: 0; margin: 0; padding: 24px; background: rgba(7, 15, 28, .92); }
-.novy-uvod .uvodni-stranka { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(240px, .8fr); align-items: stretch; gap: 28px; }
-.novy-uvod .obsah h2 { font-size: 27px; margin-bottom: 14px; }
-.novy-uvod .obsah h3 { color: #e4c58c; margin: 20px 0 12px; }
-.novy-uvod .obsah p { font-size: 15px; margin-bottom: 10px; }
-.novy-uvod .rychle-odkazy { display: flex; flex-wrap: wrap; gap: 12px; }
-.novy-uvod .rychle-odkazy a { display: inline-block; color: #f1d39a; text-decoration: none; border: 1px solid #9b7a4b; border-radius: 8px; padding: 13px; background: #101b2c; }
-.novy-uvod .externi-odkazy { display: flex; gap: 18px; flex-wrap: wrap; }
-.novy-uvod .externi-odkazy a { color: #f1d39a; }
-.novy-uvod .externi-odkazy img { width: 58px; height: 58px; object-fit: contain; display: block; margin-bottom: 5px; }
-.novy-uvod .hlavni-obrazek { margin: 0; }
-.novy-uvod .hlavni-obrazek img { width: 100%; height: 100%; max-height: 510px; object-fit: cover; border-radius: 9px; border: 1px solid #9b7a4b; display: block; }
-.novy-uvod .paticka { text-align: center; padding: 15px; border: 1px solid #9b7a4b; border-radius: 8px; color: #e4c58c; font-size: 12px; background: rgba(5, 13, 27, .92); margin-top: 12px; }
-@media (max-width: 760px) { .novy-uvod .hlavicka { flex-direction: column; align-items: flex-start; } .novy-uvod .uvodni-stranka { grid-template-columns: 1fr; } .novy-uvod .obsah { padding: 18px; } .novy-uvod .navigace { gap: 6px; } .novy-uvod .navigace a { font-size: 14px; padding: 8px; } .novy-uvod .hlavni-obrazek img { max-height: 400px; } }
-@media (prefers-reduced-motion: reduce) { .novy-uvod #background-video { display: none; } }
+/* Svetlejsi pozadi hlavicky, navigace a obsahu */
+
+.svetly-rezim .hlavicka,
+.svetly-rezim .navigace,
+.svetly-rezim .obsah {
+
+    background-color: rgba(65, 55, 45, 0.85);
+}
+
+/* Svetlejsi prekryti videa */
+
+.svetly-rezim .overlay {
+
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* ================================== */
+/* UVODNI STRANKA - ROZLOZENI         */
+/* ================================== */
+
+/* Leva cast s textem */
+.uvodni-stranka .clanek {
+
+    /* Zabira dostupny prostor */
+    flex: 1;
+
+    /* Zabrani pretekani obsahu */
+    min-width: 0;
+}
+
+
+/* Prava cast s obrazkem */
+.uvodni-obrazek {
+
+    /* Obrazek zabira 40 % sirky */
+    width: 40%;
+
+    /* Pri zmensovani okna se muze prizpusobit */
+    flex-shrink: 0;
+}
+
+
+/* Samotny obrazek */
+.uvodni-obrazek img {
+
+    /* Obrazek vyplni svuj kontejner */
+    width: 100%;
+
+    /* Zachovani pomeru stran */
+    height: auto;
+
+    /* Odstraneni drobne mezery pod obrazkem */
+    display: block;
+
+    /* Zaoblene rohy */
+    border-radius: 10px;
+
+    /* Jemny zlaty ramecek */
+    border: 1px solid rgba(228, 197, 140, 0.5);
+}
+
+/* ================================== */
+/* UVODNI STRANKA NA MOBILU           */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Text a obrazek budou pod sebou */
+    .uvodni-stranka {
+        flex-direction: column;
+    }
+
+    /* Obrazek vyplni dostupnou sirku */
+    .uvodni-obrazek {
+        width: 100%;
+    }
+}
+
+/* ================================== */
+/* UVODNI KARTY                        */
+/* ================================== */
+
+.uvodni-karty {
+
+    /* Karty budou vedle sebe */
+    display: flex;
+
+    /* Mezera mezi kartami */
+    gap: 15px;
+
+    /* Karty budou napravo v leve casti obsahu */
+    justify-content: flex-end;
+
+    /* Odsazeni od popisu kroniky */
+    margin-top: 10px;
+}
+
+/* ================================== */
+/* VZHLED JEDNOTLIVE KARTY             */
+/* ================================== */
+
+.uvodni-karta {
+
+    /* Pevna sirka a vyska karty */
+    width: 110px;
+    min-height: 110px;
+
+    /* Karta se nebude roztahovat */
+    flex: 0 0 110px;
+
+    /* Text nahore, ikona dole */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    /* Vnitrni odsazeni */
+    padding: 15px 10px;
+
+    /* Tmave pozadi */
+    background-color: rgba(5, 10, 20, 0.85);
+
+    /* Zlaty ramecek */
+    border: 1px solid #e4c58c;
+    border-radius: 8px;
+
+    /* Text */
+    color: #e4c58c;
+    text-decoration: none;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    /* Plynuly efekt */
+    transition: 0.2s ease;
+}
+
+
+/* IKONA UVNITR KARTY */
+
+.ikona-karty {
+    font-size: 30px;
+    margin-bottom: 0;
+}
+
+
+/* EFEKT PRI NAJETI MYSI */
+
+.uvodni-karta:hover {
+
+    /* Karta lehce vystoupi */
+    transform: translateY(-4px);
+
+    /* Pozadi se ztmavi */
+    background-color: black;
+
+    /* Jemny stin */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+/* KARTY NA MOBILNIM ZARIZENI */
+
+@media (max-width: 768px) {
+
+    .uvodni-karty {
+        flex-direction: column;
+    }
+
+    .uvodni-karta {
+        min-height: 90px;
+    }
+}
+
+/* ================================== */
+/* ZAJIMAVE STRANKY - ROZLOZENI       */
+/* ================================== */
+
+.externi-odkazy {
+
+    /* Dva odkazy budou vedle sebe */
+    display: flex;
+    gap: 20px;
+
+    /* Odsazeni od nadpisu a popisu */
+    margin-top: 15px;
+}
+
+
+/* JEDNA POLOZKA EXTERNIHO ODKAZU */
+
+.externi-polozka {
+
+    /* Text a logo vedle sebe */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    /* Obe polozky zaberou stejne mista */
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* TEXTOVA CAST */
+
+.externi-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.externi-text h4 {
+    color: #e4c58c;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.externi-text p {
+    color: #cccccc;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+
+/* LOGO EXTERNIHO WEBU */
+
+.externi-polozka img {
+
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+
+    /* Plynuly efekt pri najeti */
+    transition: transform 0.2s ease;
+}
+
+
+/* EFEKT PRI NAJETI MYSI */
+
+.externi-polozka a:hover img {
+    transform: scale(1.08);
+}
+
+
+/* ROZLOZENI NA MENSICH OBRAZOVKACH */
+
+@media (max-width: 768px) {
+
+    .externi-odkazy {
+        flex-direction: column;
+    }
+}
+
+/* ================================== */
+/* NADPISY SEKCI NA UVODNI STRANCE    */
+/* ================================== */
+
+/* Nadpisy Kronika dobrodruzstvi a Zajimave stranky */
+
+.sekce-kronika h3,
+.sekce-zajimavosti h3 {
+
+    /* Zlata barva nadpisu */
+    color: #e4c58c;
+
+    /* Velikost pisma */
+    font-size: 21px;
+
+    /* Mezera pod nadpisem */
+    margin-bottom: 12px;
+}
+
+
+/* POPISNE TEXTY POD NADPISY */
+
+.uvodni-stranka .popis-sekce {
+
+    /* Svetle seda barva textu */
+    color: #cccccc;
+
+    /* Mensi pismo nez hlavni uvodni text */
+    font-size: 14px;
+
+    /* Vyska radku pro lepsi citelnost */
+    line-height: 1.6;
+
+    /* Mezera pod popisem */
+    margin-bottom: 15px;
+}
+
+
+/* ODSAZENI JEDNOTLIVYCH SEKCI */
+
+.sekce-kronika {
+    margin-top: 30px;
+}
+
+.sekce-zajimavosti {
+    margin-top: 30px;
+}
+
+/* ================================== */
+/* KRONIKA - POPIS A KARTY VEDLE SEBE  */
+/* ================================== */
+
+.kronika-rozlozeni {
+
+    /* Popis a karty vedle sebe */
+    display: flex;
+
+    /* Mezera mezi textem a kartami */
+    gap: 15px;
+
+    /* Zarovnani na stred */
+    align-items: center;
+}
+
+
+/* POPIS KRONIKY */
+
+.kronika-rozlozeni .popis-sekce {
+
+    /* Text vyplni volny prostor */
+    flex: 1;
+
+    /* Zabrani pretekani textu */
+    min-width: 0;
+
+    /* Odstraneni spodni mezery */
+    margin-bottom: 0;
+}
+
+
+/* KARTY KRONIKY */
+
+.kronika-rozlozeni .uvodni-karty {
+
+    /* Karty se nebudou roztahovat */
+    flex-shrink: 0;
+
+    /* Odstraneni puvodniho odsazeni */
+    margin-top: 0;
+
+    /* Mensi mezery mezi kartami */
+    gap: 10px;
+}
+
+
+/* MOBILNI ZOBRAZENI */
+
+@media (max-width: 900px) {
+
+    .kronika-rozlozeni {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .kronika-rozlozeni .uvodni-karty {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+/* ================================== */
+/* PATICKA WEBOVE STRANKY              */
+/* ================================== */
+
+.paticka {
+
+    /* Stejna sirka jako hlavni panely */
+    max-width: 1100px;
+
+    /* Vycentrovani paticky */
+    margin: 0 auto 20px;
+
+    /* Vnitrni odsazeni */
+    padding: 12px 20px;
+
+    /* Tmave pruhledne pozadi */
+    background-color: rgba(10, 15, 25, 0.9);
+
+    /* Jemny zlaty ramecek */
+    border: 1px solid rgba(228, 197, 140, 0.5);
+    border-radius: 8px;
+
+    /* Zarovnani textu */
+    text-align: center;
+
+    /* Zlata barva pisma */
+    color: #e4c58c;
+
+    font-size: 13px;
+}
+
+
+/* Odstraneni vychozich mezer odstavce */
+
+.paticka p {
+    margin: 0;
+}
+
+/* ================================== */
+/* POLOHA PREPINACU PRI NACTENI        */
+/* ================================== */
+
+/* Vypnute video = kolecko vlevo */
+html.video-vypnuto #prepinac-videa .kolecko {
+    transform: translateX(0);
+}
+
+/* Svetly rezim = kolecko vpravo */
+html.rezim-svetly #prepinac-rezimu .kolecko {
+    transform: translateX(30px);
+}
+
+/* ================================== */
+/* SJEDNOCENI SVETLEHO REZIMU          */
+/* ================================== */
+
+/* Horni panel a paticka */
+.svetly-rezim .horni-panel,
+.svetly-rezim .paticka {
+    background-color: rgba(52, 70, 90, 0.92);
+}
+
+/* Hlavicka */
+.svetly-rezim .hlavicka {
+    background-color: transparent;
+}
+
+/* Hlavni obsah */
+.svetly-rezim .obsah {
+    background-color: rgba(52, 70, 90, 0.88);
+}
+
+/* Navigace */
+.svetly-rezim .navigace {
+    background-image:
+        linear-gradient(
+            rgba(35, 49, 67, 0.80),
+            rgba(35, 49, 67, 0.80)
+        ),
+        url("images/pozadí lišty 1.webp");
+}
+
+/* Karty kroniky */
+.svetly-rezim .uvodni-karta {
+    background-color: rgba(32, 44, 60, 0.95);
+}
+
+/* Karty pri najeti mysi */
+.svetly-rezim .uvodni-karta:hover {
+    background-color: rgba(65, 85, 110, 0.98);
+}
+
+/* Bocni panel */
+.svetly-rezim .bocni-panel {
+    background-color: rgba(40, 55, 75, 0.90);
+}
+
+/* Text zustane dobre citelny */
+.svetly-rezim .obsah p {
+    color: #f0f0f0;
+}
+
+/* ================================== */
+/* OBRAZKOVE PANELY PREPINACU          */
+/* ================================== */
+
+/* Spolecny vzhled obou panelu */
+.skupina-prepinace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #e4c58c;
+    border-radius: 14px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    flex-shrink: 0;
+}
+
+/* ================================== */
+/* VIDEO PREPINAC                      */
+/* ================================== */
+
+/* Video zapnuto */
+.panel-video {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("images/video rezim.png");
+}
+
+/* Video vypnuto - Time stop */
+.panel-video:has(#prepinac-videa:not(.zapnuto)) {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("images/neaktivi.webp");
+}
+
+/* ================================== */
+/* BAREVNY REZIM                       */
+/* ================================== */
+
+/* Nocni rezim */
+.panel-rezim {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("images/noční mod.webp");
+}
+
+/* Svetly rezim */
+html.rezim-svetly .panel-rezim {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25)
+        ),
+        url("images/svetly\ rezim.jpg");
+}
+
+/* ================================== */
+/* IKONY A POSUVNIKY                   */
+/* ================================== */
+
+.skupina-prepinace .symbol-prepinace {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.skupina-prepinace .posuvny-prepinac {
+    flex-shrink: 0;
+}

@@ -1,76 +1,328 @@
+
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fanouškovská kronika světa Faerûn pro dobrodružství Dungeons & Dragons.">
-  <title>Faerûn | Kronika Zapomenutých říší</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faerûn | Kronika světa</title>
+
+    <!-- Nacteme ulozene nastaveni jeste pred vykreslenim -->
+    <script>
+        try {
+            // Nacteme nastaveni z prohlizece
+            const ulozeneVideo = localStorage.getItem("videoZapnuto");
+            const ulozenyRezim = localStorage.getItem("svetlyRezim");
+
+            // Nastavime tridy primo na HTML element
+            if (ulozeneVideo === "false") {
+                document.documentElement.classList.add("video-vypnuto");
+            }
+
+            if (ulozenyRezim === "true") {
+                document.documentElement.classList.add("rezim-svetly");
+            }
+
+        } catch (chyba) {
+            // Pokud uloziste neni dostupne, zustane vychozi vzhled
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="novy-uvod">
-  <video autoplay muted loop playsinline id="background-video" aria-hidden="true">
-    <source src="Untitled_project.mp4" type="video/mp4">
-  </video>
-  <div class="overlay" aria-hidden="true"></div>
-  <div class="web-obal">
-    <header class="hlavicka">
-      <div class="znacka">
-        <!-- Dočasné písmeno F lze později nahradit logem, až bude ve složce images. -->
-        <div class="znacka-ikona" aria-hidden="true">F</div>
-        <div><h1>Faerûn</h1><p>Kronika Zapomenutých říší</p></div>
-      </div>
-      <div class="prepinace" aria-label="Nastavení vzhledu">
-        <button type="button" id="video-toggle" aria-pressed="true">🎥 Vypnout video</button>
-        <button type="button" id="theme-toggle" aria-pressed="false">☀️ Světlejší vzhled</button>
-      </div>
-    </header>
-    <nav class="navigace" aria-label="Hlavní navigace">
-      <a href="index.html" aria-current="page">Úvod</a>
-      <a href="historie.html">Historie</a>
-      <a href="lokace.html">Lokace</a>
-      <a href="frakce.html">Frakce</a>
-      <a href="#postavy">Postavy</a>
-    </nav>
-    <main class="obsah uvodni-stranka">
-      <article class="clanek">
+
+
+<body>
+
+    <video autoplay muted loop playsinline id="background-video">
+        <source src="Untitled_project.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <!-- HLAVICKA WEBU -->
+<!-- Obsahuje logo, nazev webu a podnadpis -->
+
+<!-- SPOLECNY PANEL HLAVICKY A NAVIGACE -->
+<div class="horni-panel">
+
+<header class="hlavicka">
+
+    <!-- Logo webu -->
+    <img
+        src="images/logo webu.png"
+        alt="Logo Faerûnu"
+        class="logo"
+    >
+
+    <!-- Textova cast hlavicky -->
+    <div class="nazev-webu">
+
+        <h1>Faerûn</h1>
+
+        <p>Kronika Zapomenutých říší</p>
+
+    </div>
+
+<!-- OVLADANI VZHLEDU WEBU -->
+<!-- Tlacitka pro prepinani pozadi a barevneho rezimu -->
+
+<div class="ovladani">
+
+    <!-- PREPINAC VIDEA -->
+    <div class="skupina-prepinace panel-video">
+        <!-- Ikona vypnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="m16 16 5 3V5l-5 3"/>
+            <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11"/>
+            <path d="m2 2 20 20"/>
+        </svg>
+
+        <!-- Posuvnik videa -->
+        <button id="prepinac-videa"
+                class="posuvny-prepinac zapnuto"
+                type="button"
+                aria-label="Zapnout nebo vypnout video na pozadí"
+                aria-pressed="true">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona zapnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="13" height="14" rx="2"/>
+            <path d="m16 10 5-3v10l-5-3"/>
+        </svg>
+
+    </div>
+
+
+    <!-- PREPINAC BAREVNEHO REZIMU -->
+    <div class="skupina-prepinace panel-rezim">
+        <!-- Ikona mesice: tmavy rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>
+        </svg>
+
+        <!-- Posuvnik rezimu -->
+        <button id="prepinac-rezimu"
+                class="posuvny-prepinac"
+                type="button"
+                aria-label="Zapnout nebo vypnout světlý režim"
+                aria-pressed="false">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona slunce: svetly rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
+        </svg>
+
+    </div>
+
+</div>
+
+</header>
+
+<!-- HLAVNI NAVIGACE WEBU -->
+<!-- Trida aktivni oznacuje prave otevrenou stranku -->
+
+<nav class="navigace">
+
+    <a href="index.html" class="aktivni" aria-current="page">Úvod</a>
+
+    <a href="historie.html">Historie</a>
+
+    <a href="lokace.html">Lokace</a>
+
+    <a href="frakce.html">Frakce</a>
+
+    <a href="#postavy">Postavy</a>
+
+</nav>
+<!-- Konec spolecneho panelu -->
+</div>
+
+<!-- ================================== -->
+<!-- HLAVNI OBSAH UVODNI STRANKY        -->
+<!-- ================================== -->
+
+<main class="obsah uvodni-stranka">
+
+    <!-- LEVA CAST: UVODNI TEXT -->
+    <article class="clanek">
+
         <h2>Vítejte ve Faerûnu</h2>
-        <p>Vítejte v kronice našeho světa. Zde naleznete informace o jeho historii, významných lokacích, frakcích a postavách.</p>
-        <h3>Kronika dobrodružství</h3>
-        <p>Prozkoumejte příběhy, místa a události, které utvářejí naše dobrodružství.</p>
-        <div class="rychle-odkazy">
-          <a href="historie.html">📖 Zápisky</a>
-          <a href="lokace.html">🪶 Předešlé akty</a>
-          <a href="frakce.html">♜ Frakce</a>
+
+        <p>
+            Vítejte v kronice našeho světa.
+            Zde naleznete informace o jeho historii,
+            významných lokacích, frakcích a postavách.
+        </p>
+
+        <p>
+            Tato kronika vám bude sloužit jako
+            průvodce během vašich dobrodružství.
+        </p>
+
+
+<!-- ================================== -->
+<!-- SEKCE KRONIKA DOBRODRUZSTVI        -->
+<!-- ================================== -->
+
+<section class="sekce-kronika">
+
+    <!-- Nadpis sekce -->
+    <h3>Kronika dobrodružství</h3>
+
+    <!-- Spolecny radek pro popis a karty -->
+    <div class="kronika-rozlozeni">
+
+        <!-- Leva cast: popis kroniky -->
+        <p class="popis-sekce">
+            Prozkoumejte příběhy naší družiny,
+            zápisky z jednotlivých dobrodružství
+            a události, které utvářely její cestu Faerûnem.
+        </p>
+
+        <!-- Prava cast: tri karty -->
+        <div class="uvodni-karty">
+
+            <a href="#" class="uvodni-karta">
+                <span>Zápisky</span>
+                <span class="ikona-karty">📖</span>
+            </a>
+
+            <a href="#" class="uvodni-karta">
+                <span>Předešlé akty</span>
+                <span class="ikona-karty">🪶</span>
+            </a>
+
+            <a href="#" class="uvodni-karta">
+                <span>Členové party</span>
+                <span class="ikona-karty">👥</span>
+            </a>
+
         </div>
-        <h3>Zajímavé stránky</h3>
-        <div class="externi-odkazy">
-          <a href="https://www.dndbeyond.com/" target="_blank" rel="noopener noreferrer"><img src="images/5etools.webp" alt="Ikona herních pravidel">D&amp;D Beyond</a>
-          <a href="https://forgottenrealms.fandom.com/wiki/Main_Page" target="_blank" rel="noopener noreferrer"><img src="images/wiki.jpg" alt="Logo Forgotten Realms Wiki">FR Wiki</a>
+
+    </div>
+
+</section>
+
+
+<!-- ================================== -->
+<!-- SEKCE: ZAJIMAVE STRANKY           -->
+<!-- ================================== -->
+
+<section class="sekce-zajimavosti">
+
+    <!-- Nadpis sekce -->
+    <h3>Zajímavé stránky</h3>
+
+    <!-- Kratky popis externich zdroju -->
+    <p class="popis-sekce">
+        Užitečné zdroje pro poznávání světa Forgotten Realms,
+        pravidel Dungeons & Dragons a přípravu dobrodružství.
+    </p>
+
+</section>
+
+<!-- ================================== -->
+<!-- EXTERNI ODKAZY NA ZAJIMAVE WEBY   -->
+<!-- ================================== -->
+
+<div class="externi-odkazy">
+
+    <!-- PRVNI ODKAZ: 5eTools -->
+    <div class="externi-polozka">
+
+        <!-- Textova cast odkazu -->
+        <div class="externi-text">
+            <h4>5eTools</h4>
+            <p>
+                Přehled pravidel, kouzel, předmětů
+                a dalších materiálů pro D&D 5e.
+            </p>
         </div>
-        <section id="postavy" aria-labelledby="postavy-nadpis">
-          <h3 id="postavy-nadpis">Postavy</h3>
-          <p>Stránku věnovanou postavám postupně doplníme.</p>
-        </section>
-      </article>
-      <figure class="hlavni-obrazek"><img src="images/pozadí.png" alt="Fantasy ilustrace světa Faerûn"></figure>
-    </main>
-    <footer class="paticka">© 2026 Faerûn | Neoficiální fanouškovský projekt</footer>
-  </div>
-  <script>
-    const videoTlacitko = document.getElementById('video-toggle');
-    const vzhledTlacitko = document.getElementById('theme-toggle');
-    const video = document.getElementById('background-video');
-    videoTlacitko.addEventListener('click', () => {
-      const vypnuto = document.body.classList.toggle('video-vypnuto');
-      if (vypnuto) video.pause(); else video.play().catch(() => {});
-      videoTlacitko.setAttribute('aria-pressed', String(!vypnuto));
-      videoTlacitko.textContent = vypnuto ? '🎥 Zapnout video' : '🎥 Vypnout video';
-    });
-    vzhledTlacitko.addEventListener('click', () => {
-      const svetly = document.body.classList.toggle('denni-rezim');
-      vzhledTlacitko.setAttribute('aria-pressed', String(svetly));
-      vzhledTlacitko.textContent = svetly ? '🌙 Tmavší vzhled' : '☀️ Světlejší vzhled';
-    });
-  </script>
+
+        <!-- Klikaci logo -->
+        <a href="https://5e.tools/"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            <img src="images/5etools.webp"
+                 alt="Otevřít 5eTools">
+        </a>
+
+    </div>
+
+    <!-- DRUHY ODKAZ: FORGOTTEN REALMS WIKI -->
+    <div class="externi-polozka">
+
+        <!-- Textova cast odkazu -->
+        <div class="externi-text">
+            <h4>Forgotten Realms Wiki</h4>
+            <p>
+                Encyklopedie světa Forgotten Realms,
+                jeho historie, postav a lokací.
+            </p>
+        </div>
+
+        <!-- Klikaci logo -->
+        <a href="https://forgottenrealms.fandom.com/wiki/Main_Page"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            <img src="images/wiki.jpg"
+                 alt="Otevřít Forgotten Realms Wiki">
+        </a>
+
+    </div>
+
+</div>
+
+    </article>
+
+    <!-- PRAVA CAST: OBRAZEK DRAKA -->
+    <div class="uvodni-obrazek">
+
+        <img
+            src="images/drak úvodní stránka.png"
+            alt="Fantasy ilustrace draka v boji"
+        >
+
+    </div>
+
+</main>
+
+<!-- ================================== -->
+<!-- PATICKA WEBOVE STRANKY             -->
+<!-- ================================== -->
+
+<footer class="paticka">
+
+    <!-- Informace o fanouskovskem projektu -->
+    <p>
+        © 2026 Faerûn | Neoficiální fanouškovský projekt
+    </p>
+
+</footer>
+
+<!-- Pripojeni JavaScriptu pro ovladani webu -->
+<script src="script.js"></script>
+
 </body>
+
 </html>
