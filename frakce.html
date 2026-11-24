@@ -6,6 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frakce | Faerûn</title>
+
+    <!-- NACTENI ULOZENEHO NASTAVENI -->
+    <script>
+        const videoUlozeno = localStorage.getItem("videoZapnuto") !== "false";
+        const rezimUlozen = localStorage.getItem("svetlyRezim") === "true";
+
+        document.documentElement.classList.toggle("video-vypnuto", !videoUlozeno);
+        document.documentElement.classList.toggle("rezim-svetly", rezimUlozen);
+    </script>
+
+    <!-- STYLY WEBU -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,73 +27,224 @@
     </video>
 
     <div class="overlay"></div>
-   
-    <header class="hlavicka">
-    <h1>Faerûn</h1>
-    <p>Kronika Zapomenutých říší</p>
-    </header>
+    
+<div class="horni-panel">
+
+<header class="hlavicka">
+
+    <!-- Logo webu -->
+    <img
+        src="images/logo webu.png"
+        alt="Logo Faerûnu"
+        class="logo"
+    >
+
+    <!-- Textova cast hlavicky -->
+    <div class="nazev-webu">
+
+        <h1>Faerûn</h1>
+
+        <p>Kronika Zapomenutých říší</p>
+
+    </div>
+
+<!-- TLACITKO MOBILNI NAVIGACE -->
+<button
+    class="mobilni-menu-tlacitko"
+    type="button"
+    aria-label="Otevřít navigaci"
+    aria-expanded="false"
+    aria-controls="hlavni-navigace"
+>
+    ☰
+</button>
+
+<!-- OVLADANI VZHLEDU WEBU -->
+<!-- Tlacitka pro prepinani pozadi a barevneho rezimu -->
+
+<div class="ovladani">
+
+    <!-- PREPINAC VIDEA -->
+    <div class="skupina-prepinace panel-video">
+        <!-- Ikona vypnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="m16 16 5 3V5l-5 3"/>
+            <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11"/>
+            <path d="m2 2 20 20"/>
+        </svg>
+
+        <!-- Posuvnik videa -->
+        <button id="prepinac-videa"
+                class="posuvny-prepinac zapnuto"
+                type="button"
+                aria-label="Zapnout nebo vypnout video na pozadí"
+                aria-pressed="true">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona zapnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="13" height="14" rx="2"/>
+            <path d="m16 10 5-3v10l-5-3"/>
+        </svg>
+
+    </div>
+
+
+    <!-- PREPINAC BAREVNEHO REZIMU -->
+    <div class="skupina-prepinace panel-rezim">
+        <!-- Ikona mesice: tmavy rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>
+        </svg>
+
+        <!-- Posuvnik rezimu -->
+        <button id="prepinac-rezimu"
+                class="posuvny-prepinac"
+                type="button"
+                aria-label="Zapnout nebo vypnout světlý režim"
+                aria-pressed="false">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona slunce: svetly rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
+        </svg>
+
+    </div>
+
+</div>
+
+</header>
 
 
 <!-- NAVIGACNI LISTA -->
 
-<nav class="navigace">
+<nav class="navigace" id="hlavni-navigace">
     <a href="index.html">Úvod</a>
     <a href="historie.html">Historie</a>
     <a href="lokace.html">Lokace</a>
-    <a href="frakce.html">Frakce</a>
+    <a href="frakce.html" class="aktivni" aria-current="page">Frakce</a>
     <a href="#postavy">Postavy</a>
 </nav>
 
+<!-- Konec spolecneho panelu -->
+</div>
 
 <!-- HLAVNI OBSAH STRANKY -->
 
-<main class="obsah">
+<main class="obsah stranka-lokace">
 
-    <!-- BOCNI PANEL -->
-    
-    <aside class="bocni-panel">
+
+<!-- BOCNI PANEL - SEZNAM FRAKCI -->
+<aside class="bocni-panel">
 
     <h3>Frakce</h3>
 
-    <a href="#">Harfeníci</a>
-    <a href="#">Zhentarim</a>
-    <a href="#">Řád Rukavice</a>
-    <a href="#">Smaragdová enkláva</a>
+    <!-- TLACITKO PRO MOBILNI VYBER FRAKCE -->
+    <button
+        class="mobilni-vyber"
+        type="button"
+        aria-expanded="false"
+        aria-controls="seznam-frakci"
+    >
+        Vybrat frakci
+        <span aria-hidden="true">⌄</span>
+    </button>
 
-    </aside>
+    <!-- SEZNAM FRAKCI -->
+    <div class="seznam-lokaci" id="seznam-frakci">
+        <a href="frakce/harfenici.html">Harfeníci</a>
+        <a href="frakce/rad-rukavice.html">Řád rukavice</a>
+    </div>
 
+</aside>
 
     <!-- CTECI OKNO -->
-   
+
+<!-- UVODNI PREHLED LOKACI -->
 <article class="clanek">
 
-    <h2>Frakce Faerûnu</h2>
+<h2>Frakce Faerûnu</h2>
 
-    <p>
-        Faerûn je domovem mnoha mocných organizací,
-        tajných spolků, vojenských řádů a dalších
-        uskupení, které ovlivňují dění ve světě.
-    </p>
+<p>
+    Svět Faerûnu je domovem nespočtu organizací, spolků,
+    řádů a tajných společností, které utvářejí jeho
+    historii a ovlivňují každodenní život jeho obyvatel.
+    Jejich působnost sahá od jednotlivých měst až
+    po vzdálené kouty celého kontinentu.
+</p>
 
-    <p>
-        Některé frakce usilují o mír a spravedlnost,
-        jiné sledují vlastní zájmy nebo touží
-        po moci a nadvládě.
-    </p>
+<p>
+    Některé organizace vznikly za účelem ochrany slabých,
+    zachování míru nebo prosazování spravedlnosti.
+    Jiné usilují o bohatství, politický vliv, získávání
+    zakázaných vědomostí či naprostou nadvládu.
+    Jejich členy mohou být obyčejní obchodníci,
+    dobrodruzi, šlechtici, mocní mágové i náboženští
+    představitelé.
+</p>
 
-    <h3>Významné frakce</h3>
+<!-- VLIV ORGANIZACI -->
+<h3>Moc a vliv</h3>
 
-    <p>
-        V levém panelu naleznete seznam organizací,
-        o kterých se můžete dozvědět více.
-    </p>
+<p>
+    Ačkoliv některé frakce působí otevřeně, jiné
+    dávají přednost utajení a své cíle prosazují
+    prostřednictvím špionáže, diplomacie nebo intrik.
+    Jejich vzájemná spojenectví a nepřátelství
+    mohou rozhodovat o osudech království,
+    měst i jednotlivců.
+</p>
+
+<p>
+    V levém panelu naleznete přehled významných
+    organizací Faerûnu, jejich historii, ideály,
+    cíle a roli ve světě Zapomenutých říší.
+</p>
 
 </article>
 
+<!-- PRAVY PANEL - SYMBOLY FRAKCI -->
 
+<aside class="mapa-lokace">
+
+    <img
+        src="images/symboly frakci.webp"
+        alt="Tapisérie zobrazující symboly různých frakcí Faerûnu"
+        class="obrazek-mapy"
+    >
+
+</aside>
 
 </main>
 
+<!-- PATICKA WEBU -->
+<footer class="paticka">
+
+    <!-- Informace o fanouskovskem projektu -->
+    <p>
+        © 2026 Faerûn | Neoficiální fanouškovský projekt
+    </p>
+
+</footer>
+
+<!-- JAVASCRIPT PRO PREPINACE -->
+<script src="script.js"></script>
 
 </body>
 </html>

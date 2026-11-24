@@ -7,26 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faerûn | Kronika světa</title>
 
-    <!-- Nacteme ulozene nastaveni jeste pred vykreslenim -->
-    <script>
-        try {
-            // Nacteme nastaveni z prohlizece
-            const ulozeneVideo = localStorage.getItem("videoZapnuto");
-            const ulozenyRezim = localStorage.getItem("svetlyRezim");
+    <!-- NACTENI ULOZENEHO NASTAVENI -->
+<script>
+    try {
+        const videoUlozeno = localStorage.getItem("videoZapnuto") !== "false";
+        const rezimUlozen = localStorage.getItem("svetlyRezim") === "true";
 
-            // Nastavime tridy primo na HTML element
-            if (ulozeneVideo === "false") {
-                document.documentElement.classList.add("video-vypnuto");
-            }
-
-            if (ulozenyRezim === "true") {
-                document.documentElement.classList.add("rezim-svetly");
-            }
-
-        } catch (chyba) {
-            // Pokud uloziste neni dostupne, zustane vychozi vzhled
-        }
-    </script>
+        document.documentElement.classList.toggle("video-vypnuto", !videoUlozeno);
+        document.documentElement.classList.toggle("rezim-svetly", rezimUlozen);
+    } catch (chyba) {
+        // Pouzijeme vychozi nastaveni
+    }
+</script>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -45,6 +37,17 @@
 
 <!-- SPOLECNY PANEL HLAVICKY A NAVIGACE -->
 <div class="horni-panel">
+
+<!-- TLACITKO MOBILNI NAVIGACE -->
+<button
+    class="mobilni-menu-tlacitko"
+    type="button"
+    aria-label="Otevřít navigaci"
+    aria-expanded="false"
+    aria-controls="hlavni-navigace"
+>
+    ☰
+</button>
 
 <header class="hlavicka">
 
@@ -139,7 +142,7 @@
 <!-- HLAVNI NAVIGACE WEBU -->
 <!-- Trida aktivni oznacuje prave otevrenou stranku -->
 
-<nav class="navigace">
+<nav class="navigace" id="hlavni-navigace">
 
     <a href="index.html" class="aktivni" aria-current="page">Úvod</a>
 
@@ -307,9 +310,8 @@
 
 </main>
 
-<!-- ================================== -->
+
 <!-- PATICKA WEBOVE STRANKY             -->
-<!-- ================================== -->
 
 <footer class="paticka">
 

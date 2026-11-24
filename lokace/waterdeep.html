@@ -5,87 +5,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waterdeep | Faerûn</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
+    <title>Lokace | Faerûn</title>
+
+    <!-- NACTENI ULOZENEHO NASTAVENI -->
+    <script>
+        const videoUlozeno = localStorage.getItem("videoZapnuto") !== "false";
+        const rezimUlozen = localStorage.getItem("svetlyRezim") === "true";
+
+        document.documentElement.classList.toggle("video-vypnuto", !videoUlozeno);
+        document.documentElement.classList.toggle("rezim-svetly", rezimUlozen);
+    </script>
+
+    <!-- STYLY WEBU -->
+    <link rel="stylesheet" href="../style.css"></head>
 
 <body>
 
     <video autoplay muted loop playsinline id="background-video">
-        
-        <source src="../Untitled_project.mp4" type="video/mp4">
-
+<source src="../Untitled_project.mp4" type="video/mp4">
     </video>
 
     <div class="overlay"></div>
-    <header class="hlavicka">
-    <h1>Faerûn</h1>
-    <p>Kronika Zapomenutých říší</p>
-    </header>
+    
+<div class="horni-panel">
+
+<header class="hlavicka">
+
+    <!-- Logo webu -->
+    <img
+        src="../images/logo webu.png"
+        alt="Logo Faerûnu"
+        class="logo"
+    >
+
+    <!-- Textova cast hlavicky -->
+    <div class="nazev-webu">
+
+        <h1>Faerûn</h1>
+
+        <p>Kronika Zapomenutých říší</p>
+
+    </div>
+
+    <!-- TLACITKO MOBILNI NAVIGACE -->
+<button
+    class="mobilni-menu-tlacitko"
+    type="button"
+    aria-label="Otevřít navigaci"
+    aria-expanded="false"
+    aria-controls="hlavni-navigace"
+>
+    ☰
+</button>
+
+<!-- OVLADANI VZHLEDU WEBU -->
+<!-- Tlacitka pro prepinani pozadi a barevneho rezimu -->
+
+<div class="ovladani">
+
+    <!-- PREPINAC VIDEA -->
+    <div class="skupina-prepinace panel-video">
+        <!-- Ikona vypnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="m16 16 5 3V5l-5 3"/>
+            <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11"/>
+            <path d="m2 2 20 20"/>
+        </svg>
+
+        <!-- Posuvnik videa -->
+        <button id="prepinac-videa"
+                class="posuvny-prepinac zapnuto"
+                type="button"
+                aria-label="Zapnout nebo vypnout video na pozadí"
+                aria-pressed="true">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona zapnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="13" height="14" rx="2"/>
+            <path d="m16 10 5-3v10l-5-3"/>
+        </svg>
+
+    </div>
 
 
-<!-- NAVIGACNI LISTA -->
+    <!-- PREPINAC BAREVNEHO REZIMU -->
+    <div class="skupina-prepinace panel-rezim">
+        <!-- Ikona mesice: tmavy rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>
+        </svg>
 
-<nav class="navigace">
+        <!-- Posuvnik rezimu -->
+        <button id="prepinac-rezimu"
+                class="posuvny-prepinac"
+                type="button"
+                aria-label="Zapnout nebo vypnout světlý režim"
+                aria-pressed="false">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona slunce: svetly rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
+        </svg>
+
+    </div>
+
+</div>
+
+</header>
+
+<!-- HLAVNI NAVIGACE WEBU -->
+<!-- Trida aktivni oznacuje prave otevrenou stranku -->
+
+<!-- HLAVNI NAVIGACE WEBU -->
+<nav class="navigace" id="hlavni-navigace">
+
     <a href="../index.html">Úvod</a>
-    <a href="../historie.html">Historie</a>
-    <a href="../lokace.html">Lokace</a>
-    <a href="../frakce.html">Frakce</a>
-    <a href="#postavy">Postavy</a>
-</nav>
 
+    <a href="../historie.html">Historie</a>
+
+    <a href="../lokace.html" class="aktivni" aria-current="page">Lokace</a>
+
+    <a href="../frakce.html">Frakce</a>
+
+    <a href="../postavy.html">Postavy</a>
+
+</nav>
+<!-- Konec spolecneho panelu -->
+</div>
 
 <!-- HLAVNI OBSAH STRANKY -->
 
-<main class="obsah">
+<main class="obsah stranka-lokace">
 
-    <!-- BOCNI PANEL -->
-    
+    <!-- BOCNI PANEL - SEZNAM LOKACI -->
 <aside class="bocni-panel">
 
     <h3>Lokace</h3>
 
-    <a href="waterdeep.html">Waterdeep</a>
-    <a href="#">Neverwinter</a>
-    <a href="#">Baldur's Gate</a>
+    <!-- MOBILNI VYBER LOKACE -->
+    <button
+        class="mobilni-vyber"
+        type="button"
+        aria-expanded="false"
+        aria-controls="seznam-lokaci"
+    >
+        Vybrat lokaci
+        <span aria-hidden="true">⌄</span>
+    </button>
+
+    <!-- SEZNAM LOKACI -->
+    <div class="seznam-lokaci" id="seznam-lokaci">
+
+        <a href="waterdeep.html" class="aktivni-lokace" aria-current="page">
+            Waterdeep
+        </a>
+
+        <a href="#">Neverwinter</a>
+        <a href="#">Baldur's Gate</a>
+
+    </div>
 
 </aside>
 
     <!-- CTECI OKNO -->
-   
+
+    <!-- PROSTREDNI PANEL - INFORMACE -->
 <article class="clanek">
 
+    <!-- NAZEV VYBRANE LOKACE -->
     <h2>Waterdeep</h2>
 
-    <p>
-        Waterdeep, známý také jako Město nádhery,
-        je jedním z nejvýznamnějších měst
-        na Mečovém pobřeží.
-    </p>
+    <!-- ZAKLADNI INFORMACE O LOKACI -->
+    <div class="informace-lokace">
+        <div class="info-karta">
+            <strong>Oblast:</strong>
+            <span>Mečové pobřeží</span>
+        </div>
+
+        <div class="info-karta">
+            <strong>Typ sídla:</strong>
+            <span>Velkoměsto</span>
+        </div>
+        
+        </div>
+
+    <!-- HISTORIE MESTA -->
+    <section class="historie-lokace">
+        <h3>Historie města</h3>
+
+        <p>
+            Waterdeep, známý také jako Město nádhery,
+            patří mezi nejvýznamnější města Mečového pobřeží.
+            Jeho historie sahá hluboko do minulosti Faerûnu.
+        </p>
+    </section>
+
+<!-- SOUVISEJICI LOKACE -->
+<section class="souvisejici-lokace">
+    <h3>Související lokace</h3>
 
     <p>
-        Město je významným centrem obchodu,
-        politiky a dobrodružství.
+        V okolí Waterdeepu se nachází řada významných
+        míst Mečového pobřeží, která jsou důležitá
+        pro obchod, cestování i dobrodružství.
     </p>
+</section>
 
-    <h3>Historie města</h3>
+<!-- ERB WATERDEEPU -->
+<div class="erb-lokace">
+    <img src="../images/logo waterdeep.webp"
+         alt="Erb města Waterdeep">
+</div>
 
-    <p>
-        Zde budou informace o historii města
-        a jeho významných událostech.
-    </p>
-
-    <h3>Zajímavá místa</h3>
-
-    <p>
-        Zde později doplníme důležité lokace,
-        které mohou hráči navštívit.
-    </p>
+<!-- TLACITKO ZOBRAZIT VICE -->
+<a href="https://forgottenrealms.fandom.com/wiki/Waterdeep"
+   class="tlacitko-vice"
+   target="_blank"
+   rel="noopener noreferrer">
+    Zobrazit více <span aria-hidden="true">→</span>
+</a>
 
 </article>
 
+<!-- PRAVY PANEL - MAPA LOKACE -->
+<aside class="mapa-lokace">
+    <img src="../images/mapa waterdeep.webp"
+         alt="Mapa města Waterdeep"
+         class="obrazek-mapy">
+</aside>
+
 </main>
 
+<!-- PATICKA WEBU -->
+<footer class="paticka">
+
+    <!-- Informace o fanouskovskem projektu -->
+    <p>
+        © 2026 Faerûn | Neoficiální fanouškovský projekt
+    </p>
+
+</footer>
+
+<!-- JAVASCRIPT PRO PREPINACE -->
+<script src="../script.js"></script>
 
 </body>
 </html>

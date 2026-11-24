@@ -6,6 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lokace | Faerûn</title>
+
+    <!-- NACTENI ULOZENEHO NASTAVENI -->
+    <script>
+        const videoUlozeno = localStorage.getItem("videoZapnuto") !== "false";
+        const rezimUlozen = localStorage.getItem("svetlyRezim") === "true";
+
+        document.documentElement.classList.toggle("video-vypnuto", !videoUlozeno);
+        document.documentElement.classList.toggle("rezim-svetly", rezimUlozen);
+    </script>
+
+    <!-- STYLY WEBU -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,57 +28,199 @@
 
     <div class="overlay"></div>
     
-    <header class="hlavicka">
-    <h1>Faerûn</h1>
-    <p>Kronika Zapomenutých říší</p>
-    </header>
+<div class="horni-panel">
+
+<header class="hlavicka">
+
+    <!-- Logo webu -->
+    <img
+        src="images/logo webu.png"
+        alt="Logo Faerûnu"
+        class="logo"
+    >
+
+    <!-- Textova cast hlavicky -->
+    <div class="nazev-webu">
+
+        <h1>Faerûn</h1>
+
+        <p>Kronika Zapomenutých říší</p>
+
+    </div>
+
+<!-- OVLADANI VZHLEDU WEBU -->
+<!-- Tlacitka pro prepinani pozadi a barevneho rezimu -->
+
+<div class="ovladani">
+
+    <!-- PREPINAC VIDEA -->
+    <div class="skupina-prepinace panel-video">
+        <!-- Ikona vypnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="m16 16 5 3V5l-5 3"/>
+            <path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11"/>
+            <path d="m2 2 20 20"/>
+        </svg>
+
+        <!-- Posuvnik videa -->
+        <button id="prepinac-videa"
+                class="posuvny-prepinac zapnuto"
+                type="button"
+                aria-label="Zapnout nebo vypnout video na pozadí"
+                aria-pressed="true">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona zapnute kamery -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="13" height="14" rx="2"/>
+            <path d="m16 10 5-3v10l-5-3"/>
+        </svg>
+
+    </div>
 
 
-<!-- NAVIGACNI LISTA -->
+    <!-- PREPINAC BAREVNEHO REZIMU -->
+    <div class="skupina-prepinace panel-rezim">
+        <!-- Ikona mesice: tmavy rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>
+        </svg>
 
-<nav class="navigace">
+        <!-- Posuvnik rezimu -->
+        <button id="prepinac-rezimu"
+                class="posuvny-prepinac"
+                type="button"
+                aria-label="Zapnout nebo vypnout světlý režim"
+                aria-pressed="false">
+            <span class="kolecko"></span>
+        </button>
+
+        <!-- Ikona slunce: svetly rezim -->
+        <svg class="symbol-prepinace" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
+        </svg>
+
+    </div>
+
+</div>
+
+<!-- TLACITKO MOBILNI NAVIGACE -->
+<button
+    class="mobilni-menu-tlacitko"
+    type="button"
+    aria-label="Otevřít navigaci"
+    aria-expanded="false"
+    aria-controls="hlavni-navigace"
+>
+    ☰
+</button>
+
+</header>
+
+<!-- HLAVNI NAVIGACE WEBU -->
+<!-- Trida aktivni oznacuje prave otevrenou stranku -->
+
+<nav class="navigace" id="hlavni-navigace">
+
     <a href="index.html">Úvod</a>
+
     <a href="historie.html">Historie</a>
-    <a href="lokace.html">Lokace</a>
+
+    <a href="lokace.html" class="aktivni" aria-current="page">Lokace</a>
+
     <a href="frakce.html">Frakce</a>
+
     <a href="#postavy">Postavy</a>
+
 </nav>
+<!-- Konec spolecneho panelu -->
+</div>
 
 <!-- HLAVNI OBSAH STRANKY -->
 
-<main class="obsah">
+<main class="obsah stranka-lokace">
 
     <!-- BOCNI PANEL -->
     <aside class="bocni-panel">
         <h3>Lokace</h3>
 
-        <a href="lokace/waterdeep.html">Waterdeep</a>
-        <a href="#">Neverwinter</a>
-        <a href="#">Baldur's Gate</a>
-    </aside>
+        <!-- TLACITKO PRO VYBER LOKACE NA MOBILU -->
+<button
+    class="mobilni-vyber"
+    type="button"
+    aria-expanded="false"
+    aria-controls="seznam-lokaci"
+>
+    Vybrat lokaci
+    <span aria-hidden="true">⌄</span>
+</button>
+
+        <!-- SEZNAM LOKACI -->
+<div class="seznam-lokaci" id="seznam-lokaci">
+
+    <a href="lokace/waterdeep.html">Waterdeep</a>
+    <a href="#">Neverwinter</a>
+    <a href="#">Baldur's Gate</a>
+
+</div>
+
+</aside>
 
     <!-- CTECI OKNO -->
-   
+
+<!-- UVODNI PREHLED LOKACI -->
 <article class="clanek">
 
     <h2>Lokace Faerûnu</h2>
 
     <p>
-        Faerûn je rozsáhlý kontinent plný
-        království, měst, nebezpečných divočin
-        a zapomenutých míst.
+        Faerûn je kontinent plný rozmanitých království,
+        starobylých měst, nebezpečných oblastí a tajemných míst.
     </p>
 
     <p>
-        V levém panelu naleznete seznam
-        významných lokací, které můžete
-        během svých dobrodružství navštívit.
+        Prozkoumejte jednotlivé lokace a seznamte se
+        s jejich historií, obyvateli a významem
+        ve světě Zapomenutých říší.
     </p>
 
 </article>
 
+<!-- PRAVY PANEL - MAPA FAERUNU -->
+    <aside class="mapa-lokace mapa-faerunu">
+    <img src="images/socha.webp"
+         alt="Mapa kontinentu Faerûn"
+         class="obrazek-mapy">
+</aside>
+
 </main>
 
+<!-- PATICKA WEBU -->
+<footer class="paticka">
+
+    <!-- Informace o fanouskovskem projektu -->
+    <p>
+        © 2026 Faerûn | Neoficiální fanouškovský projekt
+    </p>
+
+</footer>
+
+<!-- JAVASCRIPT PRO PREPINACE -->
+<script src="script.js"></script>
 
 </body>
 </html>

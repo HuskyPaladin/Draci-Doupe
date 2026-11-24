@@ -276,6 +276,19 @@ body {
     transform: translateX(30px);
 }
 
+/* POLOHA VIDEA PODLE ULOZENEHO STAVU */
+html.video-vypnuto #prepinac-videa .kolecko {
+    transform: translateX(0);
+}
+
+/* POLOHA KOLECEK PRI NACITANI */
+html:not(.video-vypnuto) #prepinac-videa .kolecko {
+    transform: translateX(30px);
+}
+
+html.rezim-svetly #prepinac-rezimu .kolecko {
+    transform: translateX(30px);
+}
 
 /* EFEKT PRI NAJETI MYSI */
 
@@ -473,6 +486,13 @@ body {
     border-radius: 5px;
 }
 
+/* AKTUALNE VYBRANA LOKACE */
+.bocni-panel a.aktivni-lokace {
+    color: #e4c58c;
+    background-color: rgba(228, 197, 140, 0.15);
+    border: 1px solid #e4c58c;
+    border-radius: 5px;
+}
 /* CTECI CAST */
 
 .clanek {
@@ -499,16 +519,16 @@ body {
 
 /* Svetlejsi pozadi hlavicky, navigace a obsahu */
 
-.svetly-rezim .hlavicka,
-.svetly-rezim .navigace,
-.svetly-rezim .obsah {
+:is(.svetly-rezim, html.rezim-svetly) .hlavicka,
+:is(.svetly-rezim, html.rezim-svetly) .navigace,
+:is(.svetly-rezim, html.rezim-svetly) .obsah {
 
     background-color: rgba(65, 55, 45, 0.85);
 }
 
 /* Svetlejsi prekryti videa */
 
-.svetly-rezim .overlay {
+:is(.svetly-rezim, html.rezim-svetly) .overlay {
 
     background-color: rgba(0, 0, 0, 0.25);
 }
@@ -698,6 +718,10 @@ body {
     /* Obe polozky zaberou stejne mista */
     flex: 1;
     min-width: 0;
+    padding: 12px;
+    border: 1px solid rgba(228, 197, 140, 0.5);
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
 }
 
 
@@ -900,41 +924,27 @@ body {
 }
 
 /* ================================== */
-/* POLOHA PREPINACU PRI NACTENI        */
-/* ================================== */
-
-/* Vypnute video = kolecko vlevo */
-html.video-vypnuto #prepinac-videa .kolecko {
-    transform: translateX(0);
-}
-
-/* Svetly rezim = kolecko vpravo */
-html.rezim-svetly #prepinac-rezimu .kolecko {
-    transform: translateX(30px);
-}
-
-/* ================================== */
 /* SJEDNOCENI SVETLEHO REZIMU          */
 /* ================================== */
 
 /* Horni panel a paticka */
-.svetly-rezim .horni-panel,
-.svetly-rezim .paticka {
+:is(.svetly-rezim, html.rezim-svetly) .horni-panel,
+:is(.svetly-rezim, html.rezim-svetly) .paticka {
     background-color: rgba(52, 70, 90, 0.92);
 }
 
 /* Hlavicka */
-.svetly-rezim .hlavicka {
+:is(.svetly-rezim, html.rezim-svetly) .hlavicka {
     background-color: transparent;
 }
 
 /* Hlavni obsah */
-.svetly-rezim .obsah {
+:is(.svetly-rezim, html.rezim-svetly) .obsah {
     background-color: rgba(52, 70, 90, 0.88);
 }
 
 /* Navigace */
-.svetly-rezim .navigace {
+:is(.svetly-rezim, html.rezim-svetly) .navigace {
     background-image:
         linear-gradient(
             rgba(35, 49, 67, 0.80),
@@ -943,23 +953,14 @@ html.rezim-svetly #prepinac-rezimu .kolecko {
         url("images/pozadí lišty 1.webp");
 }
 
-/* Karty kroniky */
-.svetly-rezim .uvodni-karta {
-    background-color: rgba(32, 44, 60, 0.95);
-}
 
-/* Karty pri najeti mysi */
-.svetly-rezim .uvodni-karta:hover {
-    background-color: rgba(65, 85, 110, 0.98);
-}
 
-/* Bocni panel */
-.svetly-rezim .bocni-panel {
-    background-color: rgba(40, 55, 75, 0.90);
-}
+
+
+
 
 /* Text zustane dobre citelny */
-.svetly-rezim .obsah p {
+:is(.svetly-rezim, html.rezim-svetly) .obsah p {
     color: #f0f0f0;
 }
 
@@ -1001,7 +1002,7 @@ html.rezim-svetly #prepinac-rezimu .kolecko {
 }
 
 /* Video vypnuto - Time stop */
-.panel-video:has(#prepinac-videa:not(.zapnuto)) {
+html.video-vypnuto .panel-video {
     background-image:
         linear-gradient(
             rgba(0, 0, 0, 0.25),
@@ -1048,4 +1049,641 @@ html.rezim-svetly .panel-rezim {
 
 .skupina-prepinace .posuvny-prepinac {
     flex-shrink: 0;
+}
+
+/* ================================= */
+/* STRANKA LOKACE - TRI SLOUPCE       */
+/* ================================= */
+
+.stranka-lokace {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr) 300px;
+    gap: 25px;
+    align-items: start;
+}
+
+/* LEVY PANEL - SEZNAM LOKACI */
+.stranka-lokace .bocni-panel {
+    width: auto;
+}
+
+/* PROSTREDNI PANEL - INFORMACE */
+.stranka-lokace .clanek {
+    min-width: 0;
+}
+
+/* PRAVY PANEL - MAPA */
+.stranka-lokace .mapa-lokace {
+    min-height: 400px;
+    padding: 20px;
+    border: 1px solid rgba(228, 197, 140, 0.5);
+    border-radius: 10px;
+    background-color: rgba(15, 20, 30, 0.85);
+}
+
+/* INFORMACNI KARTY LOKACE */
+.stranka-lokace .informace-lokace {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* JEDNOTLIVE INFORMACNI KARTY */
+.stranka-lokace .info-karta {
+    flex: 1;
+    padding: 12px;
+    background-color: rgba(15, 20, 30, 0.85);
+    border: 1px solid rgba(228, 197, 140, 0.5);
+    border-radius: 8px;
+}
+
+/* POPISKY INFORMACNICH KARET */
+.stranka-lokace .info-karta strong {
+    display: block;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+/* HODNOTY INFORMACNICH KARET */
+.stranka-lokace .info-karta span {
+    display: block;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+/* HISTORIE A SOUVISEJICI LOKACE */
+.stranka-lokace .historie-lokace,
+.stranka-lokace .souvisejici-lokace {
+    margin-top: 25px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+
+}
+
+/* ZLATE NADPISY SEKCI */
+.stranka-lokace .historie-lokace h3,
+.stranka-lokace .souvisejici-lokace h3,
+.stranka-lokace .clanek > h3 {
+    color: #e4c58c;
+
+}
+
+/* TEXTY V SEKCI */
+.stranka-lokace .historie-lokace p,
+.stranka-lokace .souvisejici-lokace p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* LEVY PANEL - POZADI LOKACI */
+.stranka-lokace .bocni-panel {
+    min-height: 410px;
+
+    background-image:
+        linear-gradient(
+            rgba(10, 15, 25, 0.45),
+            rgba(10, 15, 25, 0.75)
+        ),
+        url("images/pozadí lišty 2.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* PRAVY PANEL - MAPA WATERDEEPU */
+.stranka-lokace .mapa-lokace {
+    padding: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* OBRAZEK MAPY */
+.stranka-lokace .obrazek-mapy {
+    display: block;
+    width: 100%;
+    height: 410px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 8px;
+}
+
+/* ERB WATERDEEPU */
+.stranka-lokace .clanek {
+    position: relative;
+}
+
+/* UMISTENI ERBU */
+.stranka-lokace .erb-lokace {
+    position: absolute;
+    right: 0;
+    top: 175px;
+    width: 135px;
+}
+
+/* OBRAZEK ERBU */
+.stranka-lokace .erb-lokace img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* PROSTOR PRO ERB V TEXTOVYCH SEKCI */
+.stranka-lokace .historie-lokace,
+.stranka-lokace .souvisejici-lokace {
+    padding-right: 150px;
+}
+
+/* TLACITKO ZOBRAZIT VICE */
+.stranka-lokace .tlacitko-vice {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+    padding: 15px 20px;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    background-color: rgba(15, 20, 30, 0.85);
+    border: 1px solid #e4c58c;
+    border-radius: 8px;
+}
+
+/* TLACITKO PRI NAJETI MYSE */
+.stranka-lokace .tlacitko-vice:hover {
+    background-color: rgba(228, 197, 140, 0.15);
+    color: #e4c58c;
+}
+
+/* VYPNUTI ANIMACE PRI NACITANI */
+.posuvny-prepinac:not(.animace-povolena) .kolecko {
+    transition: none;
+}
+
+
+
+
+/* ================================== */
+/* GLOBALNI BARVY KARET A PANELU      */
+/* ================================== */
+:root {
+    --pozadi-karty: rgba(5, 10, 20, 0.95);
+    --pozadi-tlacitka: rgba(8, 13, 24, 0.95);
+    --pozadi-panelu: rgba(15, 20, 30, 0.85);
+    --pozadi-seznamu: rgba(8, 13, 24, 0.95);
+    --pozadi-najeti: rgba(38, 48, 68, 0.98);
+}
+
+html.rezim-svetly, html.svetly-rezim, body.svetly-rezim {
+    --pozadi-karty: rgba(90, 105, 125, 0.90);
+    --pozadi-tlacitka: rgba(90, 105, 125, 0.95);
+    --pozadi-panelu: rgba(90, 105, 125, 0.85);
+    --pozadi-seznamu: rgba(90, 105, 125, 0.95);
+    --pozadi-najeti: rgba(110, 125, 145, 0.98);
+}
+
+.uvodni-karta, .externi-polozka, .stranka-lokace .info-karta {
+    background-color: var(--pozadi-karty);
+}
+.bocni-panel, .stranka-lokace .mapa-lokace {
+    background-color: var(--pozadi-panelu);
+}
+.uvodni-karta:hover, .externi-polozka:hover {
+    background-color: var(--pozadi-najeti);
+}
+.stranka-lokace .tlacitko-vice, .mobilni-vyber {
+    background-color: var(--pozadi-tlacitka);
+}
+.seznam-lokaci.otevreny {
+    background-color: var(--pozadi-seznamu);
+}
+
+/* ================================== */
+/* MOBILNI NAVIGACE                   */
+/* ================================== */
+
+/* Tlacitko je na pocitaci skryte */
+.mobilni-menu-tlacitko {
+    display: none;
+}
+
+/* ZOBRAZENI NA MOBILU */
+@media (max-width: 768px) {
+
+    /* Tlacitko hamburger menu */
+    .mobilni-menu-tlacitko {
+        display: block;
+        margin-left: auto;
+
+        background: transparent;
+        border: none;
+
+        color: #e4c58c;
+        font-size: 28px;
+
+        cursor: pointer;
+    }
+
+    /* Skryti klasicke navigace */
+    .navigace {
+        display: none;
+    }
+
+    /* Navigace po otevreni */
+    .navigace.otevrena {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+}
+
+
+/* ================================== */
+/* MOBILNI ROZLOZENI WEBU             */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Hlavni panel pres celou sirku mobilu */
+    .obsah {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 15px;
+    }
+
+    /* Hlavicka a navigace */
+    .horni-panel {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 15px;
+    }
+
+    /* Uvodni stranka pod sebou */
+    .uvodni-stranka {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Hlavni clanek vyplni dostupnou sirku */
+    .uvodni-stranka .clanek {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+}
+
+
+
+/* ================================== */
+/* MOBILNI HLAVICKA                   */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Hlavicka na vice radku */
+    .hlavicka {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Mensi logo */
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+
+    /* Mensi nazev webu */
+    .hlavicka h1 {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+
+    /* Mensi podnadpis */
+    .hlavicka p {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    /* Nazev webu zabira volne misto */
+    .nazev-webu {
+        flex: 1;
+        min-width: 0;
+    }
+
+    /* Hamburger menu na pravem okraji */
+    .mobilni-menu-tlacitko {
+        order: 2;
+        margin-left: auto;
+    }
+
+    /* Prepinace na samostatnem radku */
+    .ovladani {
+        order: 3;
+        width: 100%;
+        margin-left: 0;
+        justify-content: center;
+        gap: 20px;
+    }
+
+}
+
+
+/* ================================== */
+/* MOBILNI KARTY KRONIKY              */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Popis a karty pod sebou */
+    .kronika-rozlozeni {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Tri karty vedle sebe */
+    .uvodni-karty {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        width: 100%;
+    }
+
+    /* Velikost jednotlivych karet */
+    .uvodni-karta {
+        width: 100%;
+        min-width: 0;
+        min-height: 100px;
+        padding: 10px 5px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        text-align: center;
+        font-size: 12px;
+    }
+
+}
+
+
+/* ================================== */
+/* MOBILNI KARTY EXTERNICH ODKAZU     */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Dva odkazy vedle sebe */
+    .externi-odkazy {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Samostatna karta odkazu */
+    .externi-polozka {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        min-width: 0;
+        padding: 12px 8px;
+
+        /* Barva podle rezimu */
+        border: 1px solid rgba(228, 197, 140, 0.5);
+        border-radius: 8px;
+
+        text-align: center;
+    }
+
+    /* Text uvnitr karty */
+    .externi-text {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Mensi popis */
+    .externi-text p {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    /* Obrazky odkazu */
+    .externi-polozka img {
+        width: 65px;
+        height: 65px;
+        object-fit: contain;
+    }
+
+}
+
+
+/* ================================== */
+/* MOBILNI ROZLOZENI LOKACI           */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Tri sloupce zmenime na jeden */
+    .stranka-lokace {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    /* Levy panel pres celou sirku */
+    .stranka-lokace .bocni-panel {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* Hlavni clanek pres celou sirku */
+    .stranka-lokace .clanek {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* Pravy panel s obrazkem */
+    .stranka-lokace .mapa-lokace {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* Obrazek se prizpusobi sirce mobilu */
+    .stranka-lokace .obrazek-mapy {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+}
+
+/* ================================== */
+/* ROZBALOVACI SEZNAM LOKACI          */
+/* ================================== */
+
+/* Na pocitaci skryjeme mobilni tlacitko */
+.mobilni-vyber {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    /* Zruseni vysky puvodniho bocniho panelu */
+    .stranka-lokace .bocni-panel {
+        height: auto;
+        min-height: 0;
+        padding: 15px;
+    }
+
+    /* Mobilni tlacitko pro vyber lokace */
+    .mobilni-vyber {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+        padding: 12px 15px;
+
+        /* Barva podle rezimu */
+        color: #e4c58c;
+
+        border: 1px solid rgba(228, 197, 140, 0.6);
+        border-radius: 6px;
+
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    /* Seznam lokaci je na mobilu zavreny */
+    .seznam-lokaci {
+        display: none;
+    }
+
+    /* Seznam po otevreni */
+    .seznam-lokaci.otevreny {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+}
+
+/* ================================== */
+/* VZHLED ROZBALENEHO SEZNAMU LOKACI  */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Panel s jednotlivymi lokacemi */
+    .seznam-lokaci.otevreny {
+        gap: 0;
+        padding: 5px;
+
+        /* Barva podle rezimu */
+        border: 1px solid rgba(228, 197, 140, 0.5);
+        border-radius: 6px;
+    }
+
+    /* Jednotlive odkazy */
+    .seznam-lokaci a {
+        display: block;
+        padding: 12px 15px;
+
+        color: #e4c58c;
+        text-decoration: none;
+        font-size: 14px;
+
+        border-bottom: 1px solid rgba(228, 197, 140, 0.15);
+    }
+
+    /* Posledni polozka bez oddelovace */
+    .seznam-lokaci a:last-child {
+        border-bottom: none;
+    }
+
+    /* Zvyrazneni pri vyberu */
+    .seznam-lokaci a:hover,
+    .seznam-lokaci a:focus-visible {
+        background: rgba(228, 197, 140, 0.12);
+    }
+
+}
+
+
+/* ================================== */
+/* MOBILNI DETAIL LOKACE - WATERDEEP  */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Hlavni obsah na celou sirku */
+    .stranka-lokace .clanek {
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+    }
+
+    /* Text uz nepotrebuje misto pro erb vpravo */
+    .stranka-lokace .historie-lokace,
+    .stranka-lokace .souvisejici-lokace {
+        padding-right: 0;
+    }
+
+    /* Erb nebude prekryvat text */
+    .stranka-lokace .erb-lokace {
+        position: static;
+        width: 110px;
+        margin: 15px auto;
+    }
+
+    /* Erb se prizpusobi svemu prostoru */
+    .stranka-lokace .erb-lokace img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+}
+
+/* ================================== */
+/* MOBILNI SEZNAM FRAKCI              */
+/* ================================== */
+
+@media (max-width: 768px) {
+
+    /* Zavreny seznam frakci */
+    #seznam-frakci {
+        display: none;
+    }
+
+    /* Otevreny seznam frakci */
+    #seznam-frakci.otevreny {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
 }
